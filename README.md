@@ -2,7 +2,7 @@
 
 ## Links
 
-- [Working Application - Deployed](https://syevens-bugZapper.onrender.com/)
+- [Working Application - Deployed](https://syevens-bugzapper.onrender.com/)
 
 ## Screenshots
 
