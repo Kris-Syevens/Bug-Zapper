@@ -1,0 +1,515 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* || VARIABLES */
+
+:root {
+  --COLOR-BLUE: #1da1f2;
+  --COLOR-BLACK: #14171a;
+  --COLOR-DARK_GRAY: #657786;
+  --COLOR-LIGHT_GRAY: #aab8c2;
+  --COLOR-EXTRA_LIGHT_GRAY: #e1e8ed;
+
+  /* COLORS */
+  --BGCOLOR: var(--COLOR-BLACK);
+  --BORDER-COLOR: var(--COLOR-LIGHT_GRAY);
+  --COLOR: #fff;
+  --ERROR: firebrick;
+  --INACTIVE: lightgray;
+  --LINK-COLOR: whitesmoke;
+  --LINK-HOVER: rgba(245, 245, 245, 0.9);
+  --TICKET-BGCOLOR: var(--COLOR-BLACK);
+  --STATUS-COMPLETE: limegreen;
+  --STATUS-OPEN: firebrick;
+  --TABLE-BGCOLOR: #fff;
+  --TABLE-COLOR: #000;
+  --INPUT-INVALID: #f00;
+}
+
+/* || UTILITY CLASSES */
+
+.errmsg {
+  display: inline-block;
+  background-color: var(--TABLE-BGCOLOR);
+  color: var(--ERROR);
+  padding: 0.25em;
+  margin-bottom: 0.5em;
+}
+
+.errmsg a:any-link {
+  color: var(--ERROR);
+  text-decoration: underline;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.icon-button {
+  width: 48px;
+  height: 48px;
+  font-size: 2.5rem;
+  background-color: transparent;
+  border: none;
+  color: var(--COLOR);
+  display: grid;
+  place-content: center;
+  transition: 0.5s;
+}
+
+.icon-button:hover,
+.icon-button:focus-visible {
+  transform: scale(1.1);
+  color: var(--COLOR-BLUE);
+  cursor: pointer;
+}
+
+.icon-button[disabled] {
+  visibility: hidden;
+}
+
+/* || GENERAL STYLES */
+
+body {
+  font-family: "Nunito", sans-serif;
+  min-height: 100vh;
+  background-color: var(--BGCOLOR);
+  color: var(--COLOR);
+  background-image: url("./img/bz-mini.svg");
+  background-size: 10rem;
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+#root {
+  /* React root div */
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+a:any-link {
+  color: var(--LINK-COLOR);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--COLOR-BLUE);
+}
+
+/* || PAGES */
+
+.public {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.public__main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.public__main h1 {
+  font-size: 3.5rem;
+  text-align: center;
+}
+.public__main p {
+  text-align: center;
+}
+
+.welcome-img {
+  max-height: auto;
+  max-width: 20rem;
+  margin: 4rem 2rem;
+  transition: 0.5s;
+}
+
+.btn-login {
+  background-color: var(--COLOR-BLUE);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 5px 0 var(--COLOR-DARK_GRAY);
+  transition: 0.5s;
+}
+.btn-login:hover {
+  box-shadow: 0 1px 15px 0 var(--COLOR-DARK_GRAY);
+  color: var(--COLOR-EXTRA_LIGHT_GRAY);
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.welcome a::before {
+  content: "➜ ";
+}
+
+/* || DASH HEADER, CONTAINER & FOOTER */
+
+.dash-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--BGCOLOR);
+  padding: 1rem;
+  border-bottom: 1px solid var(--BORDER-COLOR);
+}
+
+.dash-header__container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dash-header__nav {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  gap: 0.5em;
+}
+
+.dash-container {
+  padding: 0.75em 0.5em 0.5em;
+  flex-grow: 1;
+}
+
+.dash-footer {
+  font-size: 1rem;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  background-color: var(--BGCOLOR);
+  padding: 0.5em;
+  border-top: 1px solid var(--BORDER-COLOR);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  gap: 1em;
+}
+
+.dash-footer__button {
+  font-size: 1rem;
+  width: auto;
+  height: auto;
+}
+
+.dash-footer__text-highlight {
+  color: var(--COLOR-BLUE);
+}
+
+.greeting-container h1 {
+  margin-bottom: 1rem;
+}
+
+/* || TABLES - GENERAL */
+
+thead,
+tbody,
+tr {
+  display: contents;
+}
+
+.table {
+  font-size: 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  color: var(--TABLE-COLOR);
+  gap: 0.1em;
+}
+
+.table__button {
+  padding: 0.25em;
+  font-size: 1.5rem;
+  color: var(--TABLE-COLOR);
+}
+
+.table__thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.table__th,
+.table__cell {
+  background-color: var(--TABLE-BGCOLOR);
+  text-align: left;
+  border: 1px solid var(--TABLE-COLOR);
+  padding: 0.5em;
+}
+
+.table__th {
+  color: var(--COLOR-BLUE);
+}
+
+.table__cell:last-child {
+  display: grid;
+  place-content: center;
+}
+
+.table__cell--inactive {
+  background-color: var(--INACTIVE);
+}
+
+.user__title,
+.user__username,
+.user__roles {
+  display: none;
+}
+
+/* ||  TICKET */
+
+.ticket__created,
+.ticket__updated,
+.ticket__username {
+  display: none;
+}
+
+.ticket__status {
+  font-weight: bold;
+}
+
+.ticket__status--open {
+  color: var(--STATUS-OPEN);
+}
+
+.ticket__status--completed {
+  color: var(--STATUS-COMPLETE);
+}
+
+/* || FORM - GENERAL */
+
+.form {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.75em;
+  max-width: 800px;
+  background-color: var(--COLOR-LIGHT_GRAY);
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+  margin: 3rem 0 2rem;
+  position: relative;
+  border-bottom: 0.5rem solid var(--COLOR-BLUE);
+}
+
+.form label {
+  color: var(--COLOR-BLACK);
+  font-weight: 700;
+}
+
+.form__checkbox-container {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  gap: 0.5em;
+}
+
+.form__persist {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.5em;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.form__persist:hover {
+  cursor: pointer;
+}
+
+.form__title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--COLOR-BLACK);
+}
+
+.form__input,
+.form__submit-button {
+  padding: 0.5em;
+  border-radius: 15px;
+  border: none;
+}
+
+.form__submit-button {
+  background-color: var(--COLOR-BLUE);
+  color: var(--COLOR);
+  transition: 0.5s;
+}
+
+.form__submit-button:hover {
+  box-shadow: 0 1px 5px 0 var(--COLOR-EXTRA_LIGHT_GRAY);
+  cursor: pointer;
+}
+
+.form__input--text {
+  min-height: 150px;
+}
+
+.form__input--incomplete {
+  outline: 1px solid var(--INPUT-INVALID);
+}
+
+.form__checkbox {
+  width: 1rem;
+  height: 1rem;
+}
+
+.form__select {
+  width: fit-content;
+  padding: 0.25em;
+}
+
+.form__action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5em;
+  position: absolute;
+  right: 0.5em;
+}
+
+.form__row {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 2em;
+}
+
+.form__divider {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5em;
+}
+
+.back-home-btn {
+  transition: 0.5s;
+}
+
+.back-home-btn:hover {
+  color: var(--COLOR-BLUE);
+}
+
+@media screen and (max-width: 330px) {
+  .welcome-img {
+    max-width: 15rem;
+    margin: 3rem 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .welcome-img {
+    max-width: 15rem;
+    margin: 3rem 0;
+  }
+
+  .public__main h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .dash-header__nav {
+    gap: 0;
+  }
+
+  .icon-button {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 1.25rem;
+  }
+
+  .public__main h1 {
+    font-size: 3.5rem;
+  }
+
+  .welcome-img {
+    max-width: 35rem;
+    margin: 5rem 0;
+  }
+
+  .form {
+    margin: 2rem auto;
+  }
+
+  .dash-header {
+    padding: 0.5rem 1rem;
+  }
+
+  .dash-container {
+    padding: 1em;
+  }
+
+  .greeting-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .table {
+    font-size: 1.5rem;
+  }
+
+  .table--tickets {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .table--users {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .ticket__created,
+  .ticket__username {
+    display: block;
+  }
+  .user__title,
+  .user__username {
+    display: block;
+  }
+
+  .form__action-buttons {
+    position: static;
+  }
+}
+
+@media screen and (min-width: 875px) {
+  .user__roles {
+    display: block;
+  }
+  .table--users {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .ticket__updated {
+    display: block;
+  }
+
+  .table--tickets {
+    grid-template-columns: repeat(3, 1fr) 2fr repeat(2, 1fr);
+  }
+}
